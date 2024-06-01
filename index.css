@@ -1,0 +1,69 @@
+body{
+    background-color: black;
+    
+    font-family: Roboto;
+    margin-left:30px;
+    color:white;
+    
+}
+.header{
+    color: white;
+}
+
+.container{
+    display: grid;
+    
+    grid-template-columns: 150px 150px 150px;
+    column-gap: 15px;
+    height:150px;
+   
+}
+.result{
+    margin-top:50px;
+}
+
+.container div button{
+    width:150px;
+    height:150px;
+    border-radius:100px;
+    background-color: black;
+    border: 3px solid white;
+    transition: background-color 0.1s;
+}
+.container div button:hover{
+    background-color: rgb(26, 25, 25);
+    cursor:pointer;
+}
+.container div button:active{
+    background-color: yellow;
+    border-color:orange
+}
+
+.container div img{
+    width: 50px;
+}
+.personimg , .computerimg{
+    width:50px;
+}
+.fotter{
+    margin-top:60px;
+}
+.resetscore{
+    margin-top: 30px;
+    background-color: rgb(8, 159, 246);
+    border:1px solid rgb(8, 159, 246);
+    color:white;
+    padding: 10px 25px 10px 25px;
+    border-radius: 25px;
+    font-size:17px;
+}
+.resetscore:hover{
+    cursor:pointer;
+    background-color: rgba(8, 159, 246, 0.538);
+}
+
+.resetscore:active{
+    border-color:white;
+    background-color: white;
+    color:rgb(8, 159, 246);
+}
