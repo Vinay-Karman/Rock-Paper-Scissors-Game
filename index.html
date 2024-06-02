@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" href="emojis/favicon.png">
 </head>
 <body>
     <div>
@@ -53,17 +54,18 @@
             You <img  class="personimg" src=""> <img class="computerimg" src=""> Computer
         </div>
         <div class="fotter">
-            Wins: <span class="win">0</span>, Loses: <span class="lose">0</span>, Tie:<span class="tie">0</span>
+            Wins: <span class="win"></span>, Loses: <span class="lose"></span>, Tie:<span class="tie"></span>
 
         </div>
 
         <button class="resetscore" onclick="
-        wins = 0;
-        loses = 0;
-        tie = 0;
-        document.querySelector('.win').innerHTML = 0; 
-        document.querySelector('.lose').innerHTML = 0; 
-        document.querySelector('.tie').innerHTML = 0; 
+        score.wins = 0;
+        score.loses = 0;
+        score.tie = 0;
+        localStorage.removeItem('scorecard');
+        document.querySelector('.win').innerHTML = score.wins; 
+        document.querySelector('.lose').innerHTML = score.loses; 
+        document.querySelector('.tie').innerHTML = score.tie; 
         ">
             Reset Score
         </button>
@@ -73,9 +75,17 @@
     <script>
         let perselec = "";
         let compselec = "";
-        let wins = 0;
-        let loses = 0;
-        let tie = 0;
+        const score = JSON.parse(localStorage.getItem('scorecard')) || {
+            wins: 0,
+            loses: 0,
+            tie: 0
+        };
+        document.querySelector('.win').innerHTML = score.wins; 
+        document.querySelector('.lose').innerHTML = score.loses; 
+        document.querySelector('.tie').innerHTML = score.tie; 
+
+
+
         function imgdisplay(perselec1){
             
             if(perselec1 === "rock"){
@@ -107,34 +117,35 @@
         function game(perselec , compselec){
             if(perselec === compselec){
                 document.querySelector(".result").innerHTML = "Tie";
-                tie++;
-                document.querySelector(".tie").innerHTML = tie;
+                score.tie++;
+                document.querySelector(".tie").innerHTML = score.tie;
                 
             }else if(perselec === "rock" && compselec === "scissors"){
                 document.querySelector(".result").innerHTML= "You Win";
-                wins++;
-                document.querySelector(".win").innerHTML = wins;
+                score.wins++;
+                document.querySelector(".win").innerHTML = score.wins;
             }else if(perselec === "paper" && compselec === "rock"){
                 document.querySelector(".result").innerHTML = "You Win";
-                wins++;
-                document.querySelector(".win").innerHTML = wins;
+                score.wins++;
+                document.querySelector(".win").innerHTML = score.wins;
             }else if(perselec === "scissors" && compselec === "paper"){
                 document.querySelector(".result").innerHTML = "You Win";
-                wins++;
-                document.querySelector(".win").innerHTML = wins;
+                score.wins++;
+                document.querySelector(".win").innerHTML = score.wins;
             }else if(perselec === "scissors" && compselec === "rock"){
                 document.querySelector(".result").innerHTML = "You Lose";
-                loses++;
-                document.querySelector(".lose").innerHTML = loses;
+                score.loses++;
+                document.querySelector(".lose").innerHTML = score.loses;
             }else if(perselec === "rock" && compselec === "paper"){
                 document.querySelector(".result").innerHTML = "You Lose";
-                loses++;
-                document.querySelector(".lose").innerHTML = loses;
+                score.loses++;
+                document.querySelector(".lose").innerHTML = score.loses;
             }else if(perselec === "paper" && compselec === "scissors"){
                 document.querySelector(".result").innerHTML = "You Lose";
-                loses++;
-                document.querySelector(".lose").innerHTML = loses;
+                score.loses++;
+                document.querySelector(".lose").innerHTML = score.loses;
             }
+            localStorage.setItem('scorecard' , JSON.stringify(score));
         }
 
 
